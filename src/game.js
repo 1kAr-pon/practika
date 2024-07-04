@@ -6,6 +6,7 @@ import { bulletTick, deleteOneBullet, initBullet } from "./sprites/bullet.js";
 import { allTextures } from "./common/textures.js";
 import { destroyTarget, initTarget, restoreTarget } from "./sprites/targets.js";
 import { checkCollis } from "./common/util.js";
+import { explosionTick, initExplosions } from "./sprites/explosion.js";
 
 const WIDTH = appConstans.size.WIDTH
 const HEIGHT = appConstans.size.HEIGHT
@@ -49,6 +50,9 @@ const createGameScene = () => {
     restoreTarget()
     rootContainer.addChild(target)
 
+    initExplosions(app, rootContainer)
+    
+
     return app
 }
 
@@ -56,7 +60,6 @@ const collisionAllCheck = () => {
     const playerCont = rootContainer.getChildByName(appConstans.containers.player)
     const targetCont = rootContainer.getChildByName(appConstans.containers.targets)
     const bulletCont = rootContainer.getChildByName(appConstans.containers.bullets)
-    console.log("collision")
     if(bulletCont && targetCont){
         const removeBullet = []
         const removeTarget = []
@@ -66,11 +69,11 @@ const collisionAllCheck = () => {
                     if(checkCollis(b,t)){
                         if(removeTarget.indexOf(t) === -1){
                             removeTarget.push(t)
-                            console.log("collision1")
+                            console.log(t.position.x)
                         }
                         if(removeTarget.indexOf(b) === -1){
                             removeBullet.push(b)
-                            console.log("collision2")
+                            console.log(b.position.x)
                         }
                     }
                 }
@@ -105,6 +108,7 @@ const initInteraction = () => {
         playerTick(appState);
         bulletTick();
         collisionAllCheck();
+        explosionTick();
     })
 }
 

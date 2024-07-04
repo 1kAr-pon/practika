@@ -11,6 +11,7 @@ export const allTextures = {
     target1: 'target1',
     target2: 'target2' ,
     target3: 'target3',
+    explosion: 'explosion'
 }
 
 // константа с путями к ресурсам, ключами выступают константы выше
@@ -26,6 +27,7 @@ const appTextures = {
     [allTextures.target1]: 'resourse/done/object/object.png',
     [allTextures.target2]: 'resourse/done/object/object2.png',
     [allTextures.target3]: 'resourse/done/object/object3.png',
+    [allTextures.explosion]: 'resourse/explosion/explosion.json',
 }
 
 export default appTextures

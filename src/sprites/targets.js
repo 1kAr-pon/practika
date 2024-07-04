@@ -3,6 +3,7 @@ import { Container, Sprite } from "../pixi.mjs";
 import appConstans from "../common/constans.js";
 import { allTextures } from "../common/textures.js";
 import { randomIntInterval } from "../common/util.js";
+import { addExplosion } from "./explosion.js";
 
 let app;
 let rootContainer;
@@ -63,6 +64,7 @@ export const restoreTarget = () => {
 };
 
 export const destroyTarget = (t) => {
+    addExplosion({x: t.position.x, y: t.position.y})
     if(t.alive){
         targets.removeChild(t)
         t.destroy({children: true})

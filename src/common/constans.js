@@ -9,6 +9,7 @@ const appConstans = {
         player: 'player',
         bullets: 'bullets',
         targets: 'targets',
+        explosions: 'explosions',
     },
     timeouts: {
         playerLock: 2000,

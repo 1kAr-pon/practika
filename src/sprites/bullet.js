@@ -62,7 +62,7 @@ export const clearBullet = () => {
     // bullet.scale.set(1.5)
     bullet.position.x = coord.x
     bullet.position.y = coord.y - 10
-    // bullet.alpha = 1;
+    bullet.alpha = 1;
     bullets.addChild(bullet)
     bullet.play()
     timeoutShot = setTimeout(() => {

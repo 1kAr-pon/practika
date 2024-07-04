@@ -36,7 +36,7 @@ const calculateTargets = () => {
 export const restoreTarget = () => {
     aliveTargets.length = 0;
     x = 30;
-    y = appConstans.size.HEIGHT;
+    y = 50;
     const removeTarget = [];
 
     targets.children.forEach((p) => {
@@ -59,18 +59,21 @@ export const restoreTarget = () => {
         x+=target.width+10;
         targets.addChild(target);
     }
-    // calculateTargets()
+    calculateTargets()
 };
 
-export const destroyTarget = (p) => {
-    if(p.alive){
-        targets.removeChild(p)
-        p.destroy({children: true})
+export const destroyTarget = (t) => {
+    if(t.alive){
+        targets.removeChild(t)
+        t.destroy({children: true})
+        calculateTargets()
+    } else {
+        targets.removeChild(t)
+        t.destroy({children: true})
     }
 };
 
 export const targetTick = () => {
-    
 }
 
 

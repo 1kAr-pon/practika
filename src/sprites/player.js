@@ -17,7 +17,6 @@ export const addPlayer = (currApp, root) => {
     player.name = appConstans.containers.player
     player.anchor.set(0.5)
     player.scale.set(0.4)
-    player.alpha = 1;
     player.position.x = appConstans.size.WIDTH / 2
     player.position.y = appConstans.size.HEIGHT - 200
     return player
@@ -43,7 +42,7 @@ export const playerShot = () => {
 }
 
 export const playerTick = (state) => {
-    if(lockPlayer){
+    if(lockTime){
         player.alpha = 0.5
     } else {
         player.alpha = 1

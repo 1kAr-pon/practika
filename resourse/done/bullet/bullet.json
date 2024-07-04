@@ -1,0 +1,48 @@
+{"frames": {
+
+    "bullet1.png": {
+        "frame": {"x":0,"y":4,"w":11,"h":11},
+        "rotated": false,
+        "trimmed": false,
+        "spriteSourceSize": {"x":0,"y":0,"w":11,"h":20},
+        "sourceSize": {"w":11,"h":20}
+    },
+    "bullet2.png": {
+        "frame": {"x":11,"y":4,"w":11,"h":12},
+        "rotated": false,
+        "trimmed": false,
+        "spriteSourceSize": {"x":0,"y":0,"w":11,"h":20},
+        "sourceSize": {"w":11,"h":20}
+    },
+    "bullet3.png": {
+        "frame": {"x":22,"y":4,"w":11,"h":13},
+        "rotated": false,
+        "trimmed": false,
+        "spriteSourceSize": {"x":0,"y":0,"w":11,"h":20},
+        "sourceSize": {"w":11,"h":20}
+    },
+    "bullet4.png": {
+        "frame": {"x":33,"y":3,"w":11,"h":16},
+        "rotated": false,
+        "trimmed": false,
+        "spriteSourceSize": {"x":0,"y":0,"w":11,"h":20},
+        "sourceSize": {"w":11,"h":20}
+    },
+    "bullet5.png": {
+        "frame": {"x":44,"y":0,"w":11,"h":20},
+        "rotated": false,
+        "trimmed": false,
+        "spriteSourceSize": {"x":0,"y":0,"w":11,"h":20},
+        "sourceSize": {"w":11,"h":20}
+    }
+    },
+    "meta": {
+        "app": "",
+        "version": "1.0",
+        "image": "bullet.png",
+        "format": "RGBA8888",
+        "size": {"w":55,"h":20},
+        "scale": "1",
+        "smartupdate": "$TexturePacker:SmartUpdate:17e4a2d92ff3e27832c3f4938cec7c85$"
+    }
+}

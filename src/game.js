@@ -2,9 +2,10 @@ import * as PIXI from "./pixi.mjs";
 import { loadAssets, getTexture } from "./common/assets.js";
 import appConstans from "./common/constans.js";
 import { addPlayer, getPlayer, playerShot, playerTick } from "./sprites/player.js";
-import { bulletTick, initBullet } from "./sprites/bullet.js";
+import { bulletTick, deleteOneBullet, initBullet } from "./sprites/bullet.js";
 import { allTextures } from "./common/textures.js";
-import { initTarget, restoreTarget } from "./sprites/targets.js";
+import { destroyTarget, initTarget, restoreTarget } from "./sprites/targets.js";
+import { checkCollis } from "./common/util.js";
 
 const WIDTH = appConstans.size.WIDTH
 const HEIGHT = appConstans.size.HEIGHT
@@ -14,6 +15,8 @@ const appState = {
     moveLeft: false,
     moveRight: false,
 }
+
+let rootContainer;
 
 const createGameScene = () => {
     const app = new PIXI.Application({
@@ -25,7 +28,7 @@ const createGameScene = () => {
     document.body.appendChild(app.view)
     appState.app = app
 
-    const rootContainer = app.stage
+    rootContainer = app.stage
 
     const background = PIXI.Sprite.from(getTexture(allTextures.space));
     background.width = WIDTH;
@@ -49,6 +52,39 @@ const createGameScene = () => {
     return app
 }
 
+const collisionAllCheck = () => {
+    const playerCont = rootContainer.getChildByName(appConstans.containers.player)
+    const targetCont = rootContainer.getChildByName(appConstans.containers.targets)
+    const bulletCont = rootContainer.getChildByName(appConstans.containers.bullets)
+    console.log("collision")
+    if(bulletCont && targetCont){
+        const removeBullet = []
+        const removeTarget = []
+        bulletCont.children.forEach((b) => {
+            targetCont.children.forEach((t) => {
+                if(b && t){
+                    if(checkCollis(b,t)){
+                        if(removeTarget.indexOf(t) === -1){
+                            removeTarget.push(t)
+                            console.log("collision1")
+                        }
+                        if(removeTarget.indexOf(b) === -1){
+                            removeBullet.push(b)
+                            console.log("collision2")
+                        }
+                    }
+                }
+            })
+        })
+        removeTarget.forEach((p) => {
+            destroyTarget(p)
+        })
+        removeBullet.forEach((p) => {
+            deleteOneBullet(p)
+        })
+    }
+}
+
 const initInteraction = () => {
     console.log('two')
     appState.mousePosition = getPlayer().position.x
@@ -66,8 +102,9 @@ const initInteraction = () => {
     })
 
     appState.app.ticker.add((delta) => {
-        playerTick(appState)
-        bulletTick()
+        playerTick(appState);
+        bulletTick();
+        collisionAllCheck();
     })
 }
 

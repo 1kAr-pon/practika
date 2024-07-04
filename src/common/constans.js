@@ -12,7 +12,7 @@ const appConstans = {
     },
     timeouts: {
         playerLock: 2000,
-        shotTime: 1000,
+        shotTime: 500,
     },
     count: {
         countTarget: Math.floor(window.innerWidth / 40),

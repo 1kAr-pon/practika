@@ -1,4 +1,4 @@
-import { Howl, Howler } from "howler";
+import { Howl } from "hovler";
 import appConstans from "./constans.js";
 
 const allSounds = {}

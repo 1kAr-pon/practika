@@ -2,7 +2,7 @@ import { getTexture } from "../common/assets.js";
 import { Container, Sprite } from "../pixi.mjs";
 import appConstans from "../common/constans.js";
 import { allTextures } from "../common/textures.js";
-import { randomIntInterval } from "../common/util.js";
+import { destroySprite, randomIntInterval } from "../common/util.js";
 import { addExplosion } from "./explosion.js";
 
 let app;
@@ -10,6 +10,7 @@ let rootContainer;
 let targets
 let aliveTargets = []
 let targetFrames = null
+export let targetLenth;
 
 export const initTarget = (currApp, root) => {
     if(!targetFrames){
@@ -22,9 +23,6 @@ export const initTarget = (currApp, root) => {
     return targets;
 };
 
-let x = 10
-let y = appConstans.size.HEIGHT
-
 const calculateTargets = () => {
     const result = []
     targets.children.forEach((p) => {
@@ -32,7 +30,11 @@ const calculateTargets = () => {
             result.push(p.position.x)
         }
     })
+    return result.length
 };
+
+let x;
+let y;
 
 export const restoreTarget = () => {
     aliveTargets.length = 0;
@@ -45,8 +47,7 @@ export const restoreTarget = () => {
     });
 
     removeTarget.forEach((p) => {
-        targets.removeChild(p);
-        p.destroy({children: true});
+        destroySprite(p)
     });
 
     for(let i = 0; i<40; i++){
@@ -57,22 +58,24 @@ export const restoreTarget = () => {
         target.position.x = x;
         target.position.y = y;
         target.alive = true;
+        target.destroyMe = function(){
+            destroyTarget(this)
+        }
         x+=target.width+10;
         targets.addChild(target);
     }
-    calculateTargets()
+    targetLenth = calculateTargets()
 };
 
 export const destroyTarget = (t) => {
     addExplosion({x: t.position.x, y: t.position.y})
     if(t.alive){
-        targets.removeChild(t)
-        t.destroy({children: true})
+        destroySprite(t)
         calculateTargets()
     } else {
-        targets.removeChild(t)
-        t.destroy({children: true})
+        destroySprite(t)
     }
+    targetLenth = calculateTargets()
 };
 
 export const targetTick = () => {

@@ -31,11 +31,11 @@ const createGameScene = () => {
 
     rootContainer = app.stage
 
-    const background = PIXI.Sprite.from(getTexture(allTextures.space));
-    background.width = WIDTH;
-    background.height = HEIGHT;
-    background.alpha = 1;
-    rootContainer.addChild(background)
+    // const background = PIXI.Sprite.from(getTexture(allTextures.space));
+    // background.width = WIDTH;
+    // background.height = HEIGHT;
+    // background.alpha = 1;
+    // rootContainer.addChild(background)
 
     rootContainer.interactive = true
     rootContainer.hitArea = app.screen
@@ -43,15 +43,15 @@ const createGameScene = () => {
     const bullets = initBullet(app, rootContainer)
     rootContainer.addChild(bullets)
 
-    const player = addPlayer(app, rootContainer)
-    rootContainer.addChild(player)
 
     const target = initTarget(app, rootContainer)
     restoreTarget()
     rootContainer.addChild(target)
 
     initExplosions(app, rootContainer)
-    
+
+    const player = addPlayer(app, rootContainer)
+    rootContainer.addChild(player)
 
     return app
 }
@@ -80,10 +80,10 @@ const collisionAllCheck = () => {
             })
         })
         removeTarget.forEach((p) => {
-            destroyTarget(p)
+            p.destroyMe(p)
         })
         removeBullet.forEach((p) => {
-            deleteOneBullet(p)
+            p.destroyMe(p)
         })
     }
 }
@@ -119,4 +119,6 @@ export const initGame = () => {
             initInteraction()
         }
     })
+    // createGameScene()
+    // initInteraction()
 }

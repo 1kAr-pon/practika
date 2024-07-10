@@ -2,6 +2,8 @@ import {AnimatedSprite, Texture, Container, filters} from "../pixi.mjs"; //По�
 import appConstans from "../common/constans.js";
 import { allTextures } from "../common/textures.js";
 import { getTexture } from "../common/assets.js";
+import { destroyTarget } from "./targets.js";
+import { addToCache, destroySprite } from "../common/util.js";
 
 let app
 let bullets
@@ -9,9 +11,7 @@ let timeoutShot
 
 const bulletTextures = {}
 
-const bulletTypes = ['bullet']
-
-const shotTextures = {}
+// const bulletTypes = ['bullet']
 
  const speed = 1
 
@@ -28,13 +28,17 @@ export const clearBullet = () => {
         b.destroy({children: true})
     })
  }
+ 
+ export const deleteOneBullet = (bullet) => {
+    destroySprite(bullet)
+ }
 
  export const addBullet = (coord) => {
     if(timeoutShot){
         return
     }
 
-    const bulletFrame = bulletTypes[0]
+    const bulletFrame = ['bullet']
 
     let textures = []
     if(bulletTextures[bulletFrame]){
@@ -42,6 +46,7 @@ export const clearBullet = () => {
     } else {
         for(let i = 0;i<5;i++){
             const texture = Texture.from (`${bulletFrame}${i+1}.png`)
+            addToCache(`${bulletFrame}${i+1}.png`,texture)
             textures.push(texture)
         }
         bulletTextures[bulletFrame] = textures
@@ -63,6 +68,9 @@ export const clearBullet = () => {
     bullet.position.x = coord.x
     bullet.position.y = coord.y - 10
     bullet.alpha = 1;
+    bullet.destroyMe = function(){
+        deleteOneBullet(this)
+    }
     bullets.addChild(bullet)
     bullet.play()
     timeoutShot = setTimeout(() => {
@@ -70,11 +78,6 @@ export const clearBullet = () => {
     }, appConstans.timeouts.shotTime)
     console.log("shoooot")
  } 
-
- export const deleteOneBullet = (bullet) => {
-    bullets.removeChild(bullet)
-    bullet.destroy({children: true})
- }
 
  export const bulletTick = () => {
     const removeShot = []

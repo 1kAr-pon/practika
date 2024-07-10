@@ -3,6 +3,7 @@ import { getTexture } from "../common/assets.js";
 import appConstans from "../common/constans.js";
 import { allTextures } from "../common/textures.js";
 import { addBullet } from "./bullet.js";
+import { targetLenth } from "./targets.js";
 
 let player
 let app
@@ -17,6 +18,7 @@ export const addPlayer = (currApp, root) => {
     player.name = appConstans.containers.player
     player.anchor.set(0.5)
     player.scale.set(0.4)
+    player.helth = targetLenth
     player.position.x = appConstans.size.WIDTH / 2
     player.position.y = appConstans.size.HEIGHT - 200
     return player
@@ -36,6 +38,8 @@ export const lockPlayer = () => {
 }
 
 export const playerShot = () => {
+    player.helth = targetLenth
+    console.log(player.helth)
     if(!lockTime){
         addBullet({x: player.position.x, y: player.position.y})
     }

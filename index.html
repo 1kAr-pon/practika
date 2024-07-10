@@ -20,8 +20,24 @@
         align-items: center;
       }
     </style>
+    <script>
+      function changeImage(img) {
+        img.src = "/resourse/icons/start2.png";
+      }
+      function changeImageBack(img) {
+        img.src = "/resourse/icons/start1.png";
+      }
+
+    </script>
   </head>
   <body>
+    <a href="#" id="startButton">
+      <img src="/resourse/icons/start1.png" onmouseover="changeImage(this)" onmouseout="changeImageBack(this)" id="start1">
+    </a>
+    <a href="#" id="settingGame">
+      <!-- <img src="/resourse/icons/start1.png" onmouseover="changeImage(this)" onmouseout="changeImageBack(this)" id="setting1"> -->
+    </a>
     <script src="/src/main.js" type="module"></script>
+    <!-- <script src="/src/settings.js" type="module"></script> -->
   </body>
 </html>

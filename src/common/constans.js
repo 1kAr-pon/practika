@@ -1,5 +1,3 @@
-import { playerTick } from "../sprites/player.js"
-
 const appConstans = {
     size: {
         WIDTH: window.innerWidth ? window.innerWidth : 800,
@@ -17,6 +15,18 @@ const appConstans = {
     },
     count: {
         countTarget: Math.floor(window.innerWidth / 40),
+    },
+    events: {
+        infoUpdate: 'infoUpdate',
+        win: 'win',
+        gameOver: 'gameOver',
+    },
+    sounds: {
+        shot: 'shot',
+        explosion: 'explosion',
+        background: 'background',
+        // gameOver: 'gameOver',
+        // youWin: 'youWin',
     }
 }
 

@@ -10,8 +10,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^5.4.1",
+    "vite": "^5.3.3"
+  },
   "dependencies": {
     "express": "^4.19.2",
-    "socket.io": "^4.7.5"
+    "howler": "^2.2.4"
   }
 }

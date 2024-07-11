@@ -1,5 +1,4 @@
 import appConstans from "../common/constans.js"
-import { play } from "../common/sound.js"
 import { AnimatedSprite, Container, Texture } from "../pixi.mjs"
 
 let app
@@ -38,7 +37,6 @@ export const  addExplosion = (coords) => {
     explosion.position.y = coords.y
     explosions.addChild(explosion)
     explosion.play()
-    play(appConstans.sounds.explosion)
 }
 
 export const explosionTick = () => {

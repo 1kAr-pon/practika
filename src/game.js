@@ -2,11 +2,14 @@ import * as PIXI from "./pixi.mjs";
 import { loadAssets, getTexture } from "./common/assets.js";
 import appConstans from "./common/constans.js";
 import { addPlayer, getPlayer, playerShot, playerTick } from "./sprites/player.js";
-import { bulletTick, deleteOneBullet, initBullet } from "./sprites/bullet.js";
+import { bulletTick, clearBullet, deleteOneBullet, initBullet } from "./sprites/bullet.js";
 import { allTextures } from "./common/textures.js";
 import { destroyTarget, initTarget, restoreTarget } from "./sprites/targets.js";
 import { checkCollis } from "./common/util.js";
 import { explosionTick, initExplosions } from "./sprites/explosion.js";
+import { initInfo } from "./sprites/infoPanel.js";
+import { EventHub } from "./common/events.js";
+import {getGameOver} from "./sprites/messages.js"
 
 const WIDTH = appConstans.size.WIDTH
 const HEIGHT = appConstans.size.HEIGHT
@@ -31,11 +34,13 @@ const createGameScene = () => {
 
     rootContainer = app.stage
 
-    // const background = PIXI.Sprite.from(getTexture(allTextures.space));
-    // background.width = WIDTH;
-    // background.height = HEIGHT;
-    // background.alpha = 1;
-    // rootContainer.addChild(background)
+    const background = PIXI.Sprite.from(getTexture(allTextures.space));
+    background.width = WIDTH;
+    background.height = HEIGHT;
+    background.alpha = 1;
+    rootContainer.addChild(background)
+
+    initInfo(app, rootContainer)
 
     rootContainer.interactive = true
     rootContainer.hitArea = app.screen
@@ -122,3 +127,21 @@ export const initGame = () => {
     // createGameScene()
     // initInteraction()
 }
+
+const restartGame = () => {
+    clearBullet()
+    restoreTarget()
+}
+
+EventHub.on(appConstans.events.gameOver, () => {
+    appState.app.ticker.stop()
+    rootContainer.addChild(getGameOver())
+})
+
+EventHub.on(appConstans.events.restartGame, (event) => {
+    restartGame()
+    if(event === appConstans.events.gameOver){
+        rootContainer.removeChild(getGameOver())
+    }
+    appState.app.ticker.start()
+})

@@ -1,13 +1,14 @@
 const appConstans = {
     size: {
-        WIDTH: window.innerWidth ? window.innerWidth : 800,
-        HEIGHT: window.innerHeight ? window.innerHeight : 600,
+        WIDTH: window.innerWidth ,
+        HEIGHT: window.innerHeight,
     },
     containers: {
         player: 'player',
         bullets: 'bullets',
         targets: 'targets',
         explosions: 'explosions',
+        infoPanel: 'infoPanel',
     },
     timeouts: {
         playerLock: 2000,
@@ -18,8 +19,10 @@ const appConstans = {
     },
     events: {
         infoUpdate: 'infoUpdate',
-        win: 'win',
+        restartGame: 'restartGame',
         gameOver: 'gameOver',
+        helthYou: 'helthYou',
+        resetTarget: 'resetTarger'
     },
     sounds: {
         shot: 'shot',

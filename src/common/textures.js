@@ -10,7 +10,6 @@ export const allTextures = {
     space: 'space',
     target1: 'target1',
     target2: 'target2' ,
-    target3: 'target3',
     explosion: 'explosion'
 }
 
@@ -24,9 +23,8 @@ const appTextures = {
     // [allTextures.bullet3]: 'resourse/done/bullet/bullet3.png',
     [allTextures.bullet]: 'resourse/done/bullet/bullet.json',
     [allTextures.space]: 'resourse/done/space.png',
-    [allTextures.target1]: 'resourse/done/object/object.png',
-    [allTextures.target2]: 'resourse/done/object/object2.png',
-    [allTextures.target3]: 'resourse/done/object/object3.png',
+    [allTextures.target1]: 'resourse/done/object/target1.png',
+    [allTextures.target2]: 'resourse/done/object/target2.png',
     [allTextures.explosion]: 'resourse/explosion/explosion.json',
 }
 
